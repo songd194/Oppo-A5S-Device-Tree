@@ -6,7 +6,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_CPH1909.mk
+    $(LOCAL_DIR)/lineage_cph1909.mk
 
 COMMON_LUNCH_CHOICES := \
-    omni_CPH1909-eng
+    lineage_cph1909-userdebug

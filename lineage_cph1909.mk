@@ -8,12 +8,12 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
 
-# Inherit some common Omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+# Inherit Lineage common bits
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := CPH1909
-PRODUCT_NAME := omni_CPH1909
-PRODUCT_BRAND := OPPO
+PRODUCT_DEVICE := cph1909
+PRODUCT_NAME := lineage_cph1909
+PRODUCT_BRAND := Oppo
 PRODUCT_MODEL := CPH1909
-PRODUCT_MANUFACTURER := OPPO
+PRODUCT_MANUFACTURER := oppo
