@@ -87,3 +87,4 @@ DEX_PREOPT_DEFAULT := nostripping
 
 # Tells Soong to keep going even if modules are missing
 ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_DUP_RULES := true
