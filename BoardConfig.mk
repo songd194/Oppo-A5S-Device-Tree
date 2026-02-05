@@ -88,3 +88,9 @@ DEX_PREOPT_DEFAULT := nostripping
 # Tells Soong to keep going even if modules are missing
 ALLOW_MISSING_DEPENDENCIES := true
 BUILD_BROKEN_DUP_RULES := true
+
+# Fix the obsolete error by removing BUILD_BROKEN_PHONY_TARGETS
+# Add these instead to handle path/env logic:
+BUILD_BROKEN_NINJA_USES_ENV_VARS := true
+BUILD_BROKEN_OUTSIDE_INCLUDE_DIRS := true
+BUILD_BROKEN_DUP_RULES := true
