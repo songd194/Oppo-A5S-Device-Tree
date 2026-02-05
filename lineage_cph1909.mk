@@ -19,3 +19,5 @@ DISABLE_SYSTEMSERVER_JAR_CHECK := true
 # This bypasses the error you just saw
 PRODUCT_DEX_PREOPT_GENERATE_DM_FILES := false
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    vendor/oppo/cph1909/compatibility_matrix.xml

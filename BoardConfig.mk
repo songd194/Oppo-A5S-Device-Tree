@@ -94,3 +94,8 @@ BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_NINJA_USES_ENV_VARS := true
 BUILD_BROKEN_OUTSIDE_INCLUDE_DIRS := true
 BUILD_BROKEN_DUP_RULES := true
+
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/oppo/cph1909/framework_matrix.xml
+BOARD_VNDK_VERSION := current
+# Or if it fails to boot, try setting it to the version of your GSI vendor
+# BOARD_VNDK_VERSION := 29 (for Android 10)
