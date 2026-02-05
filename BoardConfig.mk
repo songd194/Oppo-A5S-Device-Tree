@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/OPPO/CPH1909
+DEVICE_PATH := device/oppo/cph1909
 
 # Architecture
 TARGET_ARCH := arm64
@@ -21,6 +21,7 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_BOARD_SUFFIX := _64
 TARGET_USES_64_BIT_BINDER := true
+TARGET_SUPPORTS_64_BIT_APPS := false
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := mt6765
@@ -56,12 +57,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_COPY_OUT_VENDOR := vendor
 
-# Kernel
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
-# TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb  <-- Comment dòng này
-TARGET_KERNEL_SOURCE := kernel/oppo/mt6765
-TARGET_KERNEL_CONFIG := oppo6765_18511_defconfig
-BOARD_KERNEL_IMAGE_NAME :=prebuilt/Image.gz-dtb
+# Kernel - Using Prebuilt
+TARGET_NO_KERNEL := false
+BOARD_ASSET_PATH := $(DEVICE_PATH)/prebuilt
+TARGET_PREBUILT_KERNEL := $(BOARD_ASSET_PATH)/Image.gz-dtb
 
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -72,24 +71,19 @@ BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version 2
 
+# VINTF Metadata (Crucial for Android 13)
+DEVICE_MATRIX_FILE := vendor/oppo/cph1909/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := vendor/oppo/cph1909/manifest.xml
+
+# System
+TARGET_COPY_OUT_VENDOR := vendor
+
 # Platform
 TARGET_BOARD_PLATFORM := default
 
-# Hack: prevent anti rollback
-#PLATFORM_SECURITY_PATCH := 2099-12-31
-#VENDOR_SECURITY_PATCH := 2099-12-31
-#PLATFORM_VERSION := 16.1.0
+# Disable Dexpreopt to bypass the "Missing compilation artifacts" error
+WITH_DEXPREOPT := false
+DEX_PREOPT_DEFAULT := nostripping
 
-# TWRP Configuration
-TW_THEME := portrait_hdpi
-TW_EXTRA_LANGUAGES := true
-TW_SCREEN_BLANK_ON_BOOT := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_USE_TOOLBOX := true
-RECOVERY_SDCARD_ON_DATA := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_Y_OFFSET := 50
-TW_H_OFFSET := -50
-
-TWRP_INCLUDE_LOGCAT := true
-TARGET_USES_LOGD := true
+# Tells Soong to keep going even if modules are missing
+ALLOW_MISSING_DEPENDENCIES := true
