@@ -57,10 +57,10 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 TARGET_COPY_OUT_VENDOR := vendor
 
-# Kernel - Using Prebuilt
+# Kernel - Build from source for LineageOS 20.0
 TARGET_NO_KERNEL := false
-BOARD_ASSET_PATH := $(DEVICE_PATH)/prebuilt
-TARGET_PREBUILT_KERNEL := $(BOARD_ASSET_PATH)/Image.gz-dtb
+# Disable prebuilt kernel - use source instead
+# TARGET_PREBUILT_KERNEL := $(BOARD_ASSET_PATH)/Image.gz-dtb
 
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
@@ -79,7 +79,7 @@ DEVICE_MANIFEST_FILE := vendor/oppo/cph1909/manifest.xml
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Platform
-TARGET_BOARD_PLATFORM := default
+TARGET_BOARD_PLATFORM := mt6765
 
 # Disable Dexpreopt to bypass the "Missing compilation artifacts" error
 WITH_DEXPREOPT := false
@@ -97,7 +97,11 @@ BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_PREBUILT_ELF_FILES := true
 BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
 BUILD_BROKEN_VERIFY_USES_LIBRARIES := true
+BUILD_BROKEN_VINTF_PRODUCT_COPY_FILES := true
+BUILD_BROKEN_COPY_WHOLE_LIBRARIES := true
+BUILD_BROKEN_USES_NETWORK := true
 
+# Framework compatibility matrix
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/oppo/cph1909/framework_matrix.xml
 BOARD_VNDK_VERSION := current
 # Or if it fails to boot, try setting it to the version of your GSI vendor
@@ -105,8 +109,11 @@ BOARD_VNDK_VERSION := current
 
 TARGET_KERNEL_SOURCE := kernel/oppo/cph1909
 TARGET_KERNEL_CONFIG := oppo6765_18511_defconfig
-# Tell the build system how to compile it
+# Build kernel from source
+KERNEL_TOOLCHAIN := $(BUILD_OUT_EXECUTABLES)/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
+KERNEL_TOOLCHAIN_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+NEED_KERNEL_MODULE_SYSTEM := true
