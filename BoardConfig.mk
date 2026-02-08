@@ -91,11 +91,22 @@ BUILD_BROKEN_DUP_RULES := true
 
 # Fix the obsolete error by removing BUILD_BROKEN_PHONY_TARGETS
 # Add these instead to handle path/env logic:
-BUILD_BROKEN_NINJA_USES_ENV_VARS := true
 BUILD_BROKEN_OUTSIDE_INCLUDE_DIRS := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_PREBUILT_ELF_FILES := true
+BUILD_BROKEN_MISSING_REQUIRED_MODULES := true
+BUILD_BROKEN_VERIFY_USES_LIBRARIES := true
 
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := device/oppo/cph1909/framework_matrix.xml
 BOARD_VNDK_VERSION := current
 # Or if it fails to boot, try setting it to the version of your GSI vendor
 # BOARD_VNDK_VERSION := 29 (for Android 10)
+
+TARGET_KERNEL_SOURCE := kernel/oppo/cph1909
+TARGET_KERNEL_CONFIG := oppo6765_18511_defconfig
+# Tell the build system how to compile it
+BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true

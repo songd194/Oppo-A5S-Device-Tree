@@ -11,8 +11,8 @@ PRODUCT_SHIPPING_API_LEVEL := 28
 
 # Add any other required properties or copy files here
 # BUT DO NOT COPY manifest.xml or compatibility_matrix.xml here!
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/Image.gz-dtb:kernel
+#PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/Image.gz-dtb:kernel
 
 # Disable system server jar check
 DISABLE_SYSTEMSERVER_JAR_CHECK := true
